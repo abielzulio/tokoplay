@@ -10,6 +10,13 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Tokoplay API")
 })
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`)
+})
+
+process.on("SIGTERM", () => {
+  server.close(() => {
+    console.log("Process terminated")
+    process.kill(process.pid, "SIGTERM")
+  })
 })
