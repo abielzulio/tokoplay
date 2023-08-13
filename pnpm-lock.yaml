@@ -34,9 +34,6 @@ devDependencies:
   concurrently:
     specifier: ^8.2.0
     version: 8.2.0
-  i:
-    specifier: ^0.3.7
-    version: 0.3.7
   nodemon:
     specifier: ^3.0.1
     version: 3.0.1
@@ -538,11 +535,6 @@ packages:
       statuses: 2.0.1
       toidentifier: 1.0.1
     dev: false
-
-  /i@0.3.7:
-    resolution: {integrity: sha512-FYz4wlXgkQwIPqhzC5TdNMLSE5+GS1IIDJZY/1ZiEPCT2S3COUVZeT5OW4BmW4r5LHLQuOosSwsvnroG9GR59Q==}
-    engines: {node: '>=0.4'}
-    dev: true
 
   /iconv-lite@0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
