@@ -1,6 +1,6 @@
 import { Eye } from "lucide-react"
 import { Category } from "../../types/tokoplay"
-import { randomize } from "../../utils/video"
+import { randomize } from "../../utils/random"
 
 interface Video {
   id: string

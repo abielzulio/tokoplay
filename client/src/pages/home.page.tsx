@@ -2,7 +2,7 @@ import { Search } from "lucide-react"
 import { useState } from "react"
 import { Link } from "wouter"
 import Tag from "../components/home/tag"
-import Video from "../components/home/video"
+import VideoCard, { Video } from "../components/home/video-card"
 import { Category } from "../types/tokoplay"
 
 const categories: Category[] = [
@@ -137,7 +137,7 @@ function HomePage() {
         </div>
         <div className="p-[10px] grid-cols-6 auto-rows-max grid gap-[20px]">
           {videos.map((video) => (
-            <Video key={video.id} video={video} />
+            <VideoCard key={video.id} video={video} />
           ))}
         </div>
       </section>
