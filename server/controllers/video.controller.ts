@@ -3,6 +3,7 @@ import { VideoDocument } from "../domains/video/video.entity"
 import { VideoService } from "../services/video.service"
 
 type VideoCreationBodyRequest = Pick<VideoDocument, "channel" | "title" | "url">
+type VideoParamsRequest = Pick<VideoDocument, "id">
 
 export const createVideo = async (
   req: Request<{}, {}, VideoCreationBodyRequest>,
@@ -22,6 +23,30 @@ export const createVideo = async (
     const videoService = new VideoService()
     const video = await videoService.createVideo(req.body)
     res.status(201).json({ meta: { status: 201 }, data: video })
+  } catch (error) {
+    res
+      .status(500)
+      .json({ meta: { status: 500, message: (error as Error).message } })
+  }
+}
+
+export const getVideoById = async (
+  req: Request<VideoParamsRequest, {}, {}>,
+  res: Response
+) => {
+  try {
+    const { id } = req.params
+    const videoService = new VideoService()
+    const video = await videoService.getVideoById(id)
+    if (!video) {
+      return res.status(404).json({
+        meta: {
+          status: 404,
+          message: `Video with id ${id} not found`,
+        },
+      })
+    }
+    res.status(200).json({ meta: { status: 200 }, data: video })
   } catch (error) {
     res
       .status(500)
