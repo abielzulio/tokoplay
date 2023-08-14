@@ -20,7 +20,7 @@ const VideoCard = memo(({ video }: { video: Video }) => {
   const { isLoading } = useVideo()
   return (
     <Link href={`/video/${video.id}`}>
-      <div className="flex flex-col gap-[10px] w-full h-[400px] rounded-md border-[1px] overflow-hidden border-white/10">
+      <div className="flex flex-col hover:cursor-pointer gap-[10px] w-full h-[400px] rounded-md border-[1px] overflow-hidden border-white/10">
         <div className="relative overflow-hidden">
           <img
             src={video.image}
@@ -49,7 +49,7 @@ const VideoCard = memo(({ video }: { video: Video }) => {
               </span>
             </div>
           </div>
-          <div className="absolute bottom-0 left-0 right-0 flex z-5 flex-col gap-[3px] px-[10px] py-[5px] bg-black/50 backdrop-blur-md">
+          <div className="absolute border-t-[1px] border-white/20 bottom-0 left-0 right-0 flex z-5 flex-col gap-[3px] px-[10px] py-[5px] bg-black/50 backdrop-blur-md">
             <h3 className="text-[14px] font-medium">{video.title}</h3>
             <span className="text-[12px] opacity-50">{video.channel}</span>
           </div>
