@@ -1,6 +1,7 @@
 import type { Request, Response } from "express"
 import { VideoDocument } from "../domains/video/video.entity"
 import { VideoService } from "../services/video.service"
+import checkPayloadRequest from "../utils/payload"
 
 type CreateVideoBodyRequest = Pick<VideoDocument, "channel" | "title" | "url">
 type GetVideosByIdParamsRequest = Pick<VideoDocument, "id">
@@ -10,15 +11,10 @@ export const createVideo = async (
   res: Response
 ) => {
   try {
-    const { channel, title, url } = req.body
-    if (!channel || !title || !url) {
-      return res.status(400).json({
-        meta: {
-          status: 400,
-          message: `Missing required body`,
-        },
-      })
-    }
+    const requiredBody = ["channel", "title", "url"] satisfies Array<
+      keyof CreateVideoBodyRequest
+    >
+    checkPayloadRequest<CreateVideoBodyRequest>(req, res, "body", requiredBody)
 
     const videoService = new VideoService()
     const video = await videoService.createVideo(req.body)
