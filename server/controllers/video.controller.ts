@@ -2,11 +2,11 @@ import type { Request, Response } from "express"
 import { VideoDocument } from "../domains/video/video.entity"
 import { VideoService } from "../services/video.service"
 
-type VideoCreationBodyRequest = Pick<VideoDocument, "channel" | "title" | "url">
-type VideoParamsRequest = Pick<VideoDocument, "id">
+type CreateVideoBodyRequest = Pick<VideoDocument, "channel" | "title" | "url">
+type GetVideosByIdParamsRequest = Pick<VideoDocument, "id">
 
 export const createVideo = async (
-  req: Request<{}, {}, VideoCreationBodyRequest>,
+  req: Request<{}, {}, CreateVideoBodyRequest>,
   res: Response
 ) => {
   try {
@@ -31,7 +31,7 @@ export const createVideo = async (
 }
 
 export const getVideoById = async (
-  req: Request<VideoParamsRequest, {}, {}>,
+  req: Request<GetVideosByIdParamsRequest, {}, {}>,
   res: Response
 ) => {
   try {
