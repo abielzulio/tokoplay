@@ -13,14 +13,6 @@ const categories: Category[] = [
   "Akan Datang",
 ]
 
-interface Product {
-  id: string
-  name: string
-  image: string
-  price: number
-  url: string
-}
-
 interface User {
   id: string
   name: string
@@ -37,54 +29,54 @@ interface Comment {
 
 const videos: Video[] = [
   {
-    id: "1",
+    id: "8nz9e8HOWcM",
     title: "Cutlery Set for Kids",
-    image: "/alerta.jpg",
+    image: "/8nz9e8HOWcM.jpg",
     url: "https://www.youtube.com/shorts/8nz9e8HOWcM",
     views: 1200,
     channel: "Aleta",
     category: "Live",
   },
   {
-    id: "2",
+    id: "JQb6dPNh5j8",
+    title: "Slushy Maker",
+    image: "/JQb6dPNh5j8.jpg",
+    url: "https://www.youtube.com/shorts/JQb6dPNh5j8",
+    views: 1200,
+    channel: "So Saute",
+    category: "Live",
+  },
+  {
+    id: "8nz9e8HOWcM",
     title: "Cutlery Set for Kids",
-    image: "/alerta.jpg",
+    image: "/8nz9e8HOWcM.jpg",
     url: "https://www.youtube.com/shorts/8nz9e8HOWcM",
     views: 1200,
     channel: "Aleta",
     category: "Live",
   },
   {
-    id: "3",
-    title: "Cutlery Set for Kids",
-    image: "/alerta.jpg",
-    url: "https://www.youtube.com/shorts/8nz9e8HOWcM",
-    views: 1200,
-    channel: "Aleta",
-    category: "Live",
-  },
-  {
-    id: "4",
+    id: "8nz9e8HOWcM",
     title: "Cutlery Set for Kids HAHAHAHAHAH",
-    image: "/alerta.jpg",
+    image: "/8nz9e8HOWcM.jpg",
     url: "https://www.youtube.com/shorts/8nz9e8HOWcM",
     views: 1200,
     channel: "Aleta",
     category: "Live",
   },
   {
-    id: "5",
+    id: "8nz9e8HOWcM",
     title: "Cutlery Set for Kids",
-    image: "/alerta.jpg",
+    image: "/8nz9e8HOWcM.jpg",
     url: "https://www.youtube.com/shorts/8nz9e8HOWcM",
     views: 1200,
     channel: "Aleta",
     category: "Live",
   },
   {
-    id: "6",
+    id: "8nz9e8HOWcM",
     title: "Cutlery Set for Kids",
-    image: "/alerta.jpg",
+    image: "/8nz9e8HOWcM.jpg",
     url: "https://www.youtube.com/shorts/8nz9e8HOWcM",
     views: 1200,
     channel: "Aleta",
@@ -105,7 +97,7 @@ function HomePage() {
         </Link>
         <p>☚</p>
       </div>
-      <section className="w-[calc(100vw-24px)] mx-auto bg-[#18181b] border-[1px] border-white/10">
+      <section className="w-[calc(100vw-24px)] mx-auto bg-gray border-[1px] border-white/10">
         <form
           onSubmit={(e) => {
             e.preventDefault()
@@ -122,8 +114,9 @@ function HomePage() {
           />
         </form>
         <div className="flex items-center border-b-[1px] p-[10px] gap-[10px] border-white/20 ">
-          {categories.map((category) => (
+          {categories.map((category, id) => (
             <Tag
+              key={id}
               onClick={() =>
                 tags.includes(category)
                   ? setTags((prev) => prev.filter((item) => item !== category))
