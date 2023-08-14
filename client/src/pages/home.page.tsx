@@ -2,16 +2,8 @@ import { Search } from "lucide-react"
 import { useState } from "react"
 import { Link } from "wouter"
 import Tag from "../components/home/tag"
-import VideoCard, { Video } from "../components/home/video-card"
-import { Category } from "../types/tokoplay"
-
-const categories: Category[] = [
-  "Live",
-  "Eksplor",
-  "Promo",
-  "Terbaru",
-  "Akan Datang",
-]
+import VideoCard from "../components/home/video-card"
+import useTokoplay from "../hooks/use-tokoplay"
 
 interface User {
   id: string
@@ -27,65 +19,9 @@ interface Comment {
   createdAt: string
 }
 
-const videos: Video[] = [
-  {
-    id: "8nz9e8HOWcM",
-    title: "Cutlery Set for Kids",
-    image: "/8nz9e8HOWcM.jpg",
-    url: "https://www.youtube.com/shorts/8nz9e8HOWcM",
-    views: 1200,
-    channel: "Aleta",
-    category: "Live",
-  },
-  {
-    id: "JQb6dPNh5j8",
-    title: "Slushy Maker",
-    image: "/JQb6dPNh5j8.jpg",
-    url: "https://www.youtube.com/shorts/JQb6dPNh5j8",
-    views: 1200,
-    channel: "So Saute",
-    category: "Live",
-  },
-  {
-    id: "8nz9e8HOWcM",
-    title: "Cutlery Set for Kids",
-    image: "/8nz9e8HOWcM.jpg",
-    url: "https://www.youtube.com/shorts/8nz9e8HOWcM",
-    views: 1200,
-    channel: "Aleta",
-    category: "Live",
-  },
-  {
-    id: "8nz9e8HOWcM",
-    title: "Cutlery Set for Kids HAHAHAHAHAH",
-    image: "/8nz9e8HOWcM.jpg",
-    url: "https://www.youtube.com/shorts/8nz9e8HOWcM",
-    views: 1200,
-    channel: "Aleta",
-    category: "Live",
-  },
-  {
-    id: "8nz9e8HOWcM",
-    title: "Cutlery Set for Kids",
-    image: "/8nz9e8HOWcM.jpg",
-    url: "https://www.youtube.com/shorts/8nz9e8HOWcM",
-    views: 1200,
-    channel: "Aleta",
-    category: "Live",
-  },
-  {
-    id: "8nz9e8HOWcM",
-    title: "Cutlery Set for Kids",
-    image: "/8nz9e8HOWcM.jpg",
-    url: "https://www.youtube.com/shorts/8nz9e8HOWcM",
-    views: 1200,
-    channel: "Aleta",
-    category: "Live",
-  },
-]
-
 function HomePage() {
-  const [tags, setTags] = useState<string[]>([])
+  const { videos, tags, isLoading } = useTokoplay()
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
   return (
     <main className="flex flex-col min-w-screen min-h-screen w-full text-white bg-[#000]">
       <div className="flex items-center justify-between p-[12px]">
@@ -114,19 +50,23 @@ function HomePage() {
           />
         </form>
         <div className="flex items-center border-b-[1px] p-[10px] gap-[10px] border-white/20 ">
-          {categories.map((category, id) => (
-            <Tag
-              key={id}
-              onClick={() =>
-                tags.includes(category)
-                  ? setTags((prev) => prev.filter((item) => item !== category))
-                  : setTags([...tags, category])
-              }
-              isSelected={tags.includes(category)}
-            >
-              {category}
-            </Tag>
-          ))}
+          {tags &&
+            tags?.length > 0 &&
+            tags.map((category, id) => (
+              <Tag
+                key={id}
+                onClick={() =>
+                  selectedTags.includes(category)
+                    ? setSelectedTags((prev) =>
+                        prev.filter((item) => item !== category)
+                      )
+                    : setSelectedTags((prev) => [...prev, category])
+                }
+                isSelected={selectedTags.includes(category)}
+              >
+                {category}
+              </Tag>
+            ))}
         </div>
         <div className="p-[10px] grid-cols-6 auto-rows-max grid gap-[20px]">
           {videos.map((video) => (

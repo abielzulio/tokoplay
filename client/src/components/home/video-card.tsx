@@ -1,20 +1,10 @@
 import { Eye } from "lucide-react"
-import { Category } from "../../types/tokoplay"
-import { randomize } from "../../utils/random"
-import useVideo from "../../hooks/use-video"
-import { cn } from "../../utils/cn"
-import { Link } from "wouter"
 import { memo } from "react"
-
-export interface Video {
-  id: string
-  category: Category
-  title: string
-  channel: string
-  image: string
-  url: string
-  views: number
-}
+import { Link } from "wouter"
+import useVideo from "../../hooks/use-video"
+import { Video } from "../../types/tokoplay"
+import { cn } from "../../utils/cn"
+import { randomize } from "../../utils/random"
 
 const VideoCard = memo(({ video }: { video: Video }) => {
   const { isLoading } = useVideo()
