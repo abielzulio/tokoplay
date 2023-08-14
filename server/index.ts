@@ -16,11 +16,11 @@ const server = app.listen(port, () => {
 app.use(
   cors((req, callback) => {
     const allowlist = ["http://localhost:5173", "https://tokoplay.netlify.app"]
-
-    if (allowlist.indexOf(req.header("Origin")) !== -1) {
-      callback(null, { origin: true })
+    const origin = req.header("Origin")
+    if (!origin || allowlist.indexOf(origin) === -1) {
+      return callback(null, { origin: false })
     } else {
-      callback(null, { origin: false })
+      return callback(null, { origin: true })
     }
   })
 )
