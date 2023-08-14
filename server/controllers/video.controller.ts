@@ -2,18 +2,15 @@ import type { Request, Response } from "express"
 import { VideoDocument } from "../domains/video/video.entity"
 import { VideoService } from "../services/video.service"
 
-type VideoCreationBodyRequest = Pick<
-  VideoDocument,
-  "thumbnail" | "title" | "url"
->
+type VideoCreationBodyRequest = Pick<VideoDocument, "channel" | "title" | "url">
 
 export const createVideo = async (
   req: Request<{}, {}, VideoCreationBodyRequest>,
   res: Response
 ) => {
   try {
-    const { thumbnail, title, url } = req.body
-    if (!thumbnail || !title || !url) {
+    const { channel, title, url } = req.body
+    if (!channel || !title || !url) {
       return res.status(400).json({
         meta: {
           status: 400,
