@@ -4,6 +4,8 @@
  * @returns
  */
 
-export function randomize(maxNumber: number) {
+function randomize(maxNumber: number) {
   return Math.floor(Math.random() * maxNumber)
 }
+
+export default randomize

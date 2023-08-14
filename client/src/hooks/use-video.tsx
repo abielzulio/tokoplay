@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { randomize } from "../utils/random"
+import randomize from "../utils/random"
 
 function useVideo() {
   const [isLoading, setLoading] = useState(true)
