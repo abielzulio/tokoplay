@@ -64,7 +64,16 @@ function HomePage() {
               </Tag>
             ))}
         </div>
-        {filteredVideos.length > 0 ? (
+        {isLoading ? (
+          <div className="p-[10px] grid-cols-6 auto-rows-max grid gap-[20px]">
+            {[...Array(6).keys()].map((_, id) => (
+              <div
+                className="rounded-md h-[400px] animate-pulse bg-white/10"
+                key={id}
+              />
+            ))}
+          </div>
+        ) : filteredVideos.length > 0 ? (
           <div className="p-[10px] grid-cols-6 auto-rows-max grid gap-[20px]">
             {filteredVideos.map((video) => (
               <VideoCard key={video.id} video={video} />
