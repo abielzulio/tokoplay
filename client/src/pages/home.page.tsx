@@ -95,7 +95,7 @@ const videos: Video[] = [
 function HomePage() {
   const [tags, setTags] = useState<string[]>([])
   return (
-    <main className="flex flex-col w-screen min-h-screen text-white bg-[#000]">
+    <main className="flex flex-col min-w-screen min-h-screen w-full text-white bg-[#000]">
       <div className="flex items-center justify-between p-[12px]">
         <p>☛</p>
         <Link href="/">
