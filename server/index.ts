@@ -15,17 +15,23 @@ const server = app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`)
 })
 
-app.use(
+app.use((_, res, next) => {
   cors((req, callback) => {
     const allowlist = ["http://localhost:5173", "https://tokoplay.zulio.me"]
-    const origin = req.header("Origin")
+    const origin = req.headers.origin
     if (!origin || (origin && allowlist.indexOf(origin) === -1)) {
-      return callback(null, { origin: true })
-    } else {
       return callback(null, { origin: false })
+    } else {
+      res.header("Access-Control-Allow-Origin", req.headers.origin)
+      res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+      )
+      return callback(null, { origin: true })
     }
+    next()
   })
-)
+})
 
 app.use(express.json())
 
