@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import mongoConnect from "./lib/mongo"
 import videoRouter from "./routers/video.router"
 import cors from "cors"
+import productRouter from "./routers/product.router"
 
 dotenv.config()
 
@@ -28,6 +29,7 @@ app.use(
 app.use(express.json())
 
 app.use("/v1", videoRouter)
+app.use("/v1", productRouter)
 
 mongoConnect(process.env.DB_URL, "tokoplay", () => {
   server
