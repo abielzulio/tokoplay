@@ -10,3 +10,12 @@ export interface Video {
   views: number
   createdAt: string
 }
+
+export interface Product {
+  id: string
+  videoId: Video["id"]
+  name: string
+  image: string
+  price: number
+  url: string
+}
