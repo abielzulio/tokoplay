@@ -5,20 +5,6 @@ import VideoCard from "../components/home/video-card"
 import useFilteredVideos from "../hooks/use-filtered-videos"
 import useTokoplay from "../hooks/use-tokoplay"
 
-interface User {
-  id: string
-  name: string
-  email: string
-  password: string
-}
-
-interface Comment {
-  id: string
-  user: User
-  content: string
-  createdAt: string
-}
-
 function HomePage() {
   const { videos, tags, isLoading } = useTokoplay()
   const { filteredVideos, filterValue } = useFilteredVideos(videos)

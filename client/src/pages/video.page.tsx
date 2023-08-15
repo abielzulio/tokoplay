@@ -5,7 +5,7 @@ import useVideoPage from "../hooks/use-video"
 import ProductCard from "../components/video/product-card"
 
 function VideoPage() {
-  const { video, products } = useVideoPage("/video/:id")
+  const { video, products, comments } = useVideoPage("/video/:id")
   return (
     <section className="relative flex min-w-screen min-h-screen flex-col bg-[#000]">
       <div className="flex gap-[10px] items-center p-[12px] bg-gray border-b-[1px] border-b-white/10">
@@ -46,7 +46,11 @@ function VideoPage() {
             height={"100%"}
           />
         </div>
-        <Comment />
+        <div className="w-full border-l-[1px] border-l-white/10 bg-gray relative">
+          {video.data && (
+            <Comment comments={comments} videoId={video?.data?.id} />
+          )}
+        </div>
       </div>
     </section>
   )
