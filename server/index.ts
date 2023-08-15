@@ -20,16 +20,19 @@ app.use((_, res, next) => {
     const allowlist = ["http://localhost:5173", "https://tokoplay.zulio.me"]
     const origin = req.headers.origin
     if (!origin || (origin && allowlist.indexOf(origin) === -1)) {
-      return callback(null, { origin: false })
-    } else {
-      res.header("Access-Control-Allow-Origin", req.headers.origin)
-      res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-      )
-      return callback(null, { origin: true })
+      callback(null, { origin: false })
+      next()
+      return
     }
+
+    res.header("Access-Control-Allow-Origin", req.headers.origin)
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    )
+    callback(null, { origin: true })
     next()
+    return
   })
 })
 
