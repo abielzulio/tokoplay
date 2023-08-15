@@ -1,13 +1,15 @@
 import { Eye, X } from "lucide-react"
 import ReactPlayer from "react-player/youtube"
 import Comment from "../components/video/comment"
-import useVideoPage from "../hooks/use-video"
 import ProductCard from "../components/video/product-card"
+import useVideo from "../hooks/use-video"
 import { cn } from "../utils/cn"
 import randomize from "../utils/random"
+import { navigate } from "wouter/use-location"
 
 function VideoPage() {
-  const { video, products, comments } = useVideoPage("/video/:id")
+  const { video, products, comments } = useVideo("/video/:id")
+  if (video.error) return navigate("/")
   return (
     <section className="relative flex min-w-screen min-h-screen flex-col bg-[#000]">
       <div className="flex items-center w-full bg-gray">
