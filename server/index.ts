@@ -1,3 +1,4 @@
+import cors from "cors"
 import dotenv from "dotenv"
 import express, { Express } from "express"
 import mongoConnect from "./lib/mongo"
@@ -13,6 +14,8 @@ const port = process.env.PORT
 const server = app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`)
 })
+
+app.use(cors())
 
 app.use(express.json())
 
