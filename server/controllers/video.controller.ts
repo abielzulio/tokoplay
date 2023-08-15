@@ -11,14 +11,17 @@ export const createVideo = async (
   res: Response
 ) => {
   try {
-    const requiredBody = ["channel", "title", "url"] satisfies Array<
-      keyof CreateVideoBodyRequest
-    >
+    const requiredBody: Array<keyof CreateVideoBodyRequest> = [
+      "channel",
+      "title",
+      "url",
+    ]
+
     checkPayloadRequest<CreateVideoBodyRequest>(req, res, "body", requiredBody)
 
     const videoService = new VideoService()
-    const video = await videoService.createVideo(req.body)
-    res.status(201).json({ meta: { status: 201 }, data: video })
+    await videoService.createVideo(req.body)
+    res.status(201).json({ meta: { status: 201 } })
   } catch (error) {
     res
       .status(500)

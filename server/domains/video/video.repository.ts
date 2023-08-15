@@ -28,7 +28,7 @@ export class VideoRepository {
   }
 
   public async getVideoById(
-    id: string
+    id: VideoDocument["id"]
   ): Promise<WithId<Pick<VideoDocument, "_id">> | null> {
     try {
       const video = Video.findOne({ id }, { projection: { _id: 0 } })
