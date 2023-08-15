@@ -3,18 +3,19 @@ import { memo, useRef, useState } from "react"
 import { Comment, Video } from "../../types/tokoplay"
 import { FetchStateWithMutate } from "../../hooks/use-fetch"
 import { createComment } from "../../api/comment.api"
+import { timeFromNow } from "../../utils/date"
 import useScrolltToBottom from "../../hooks/use-scroll-to-bottom"
 
 const CommentItem = memo(({ comment }: { comment: Comment }) => {
   return (
     <div className="flex gap-[5px] items-start h-fit w-full bg-gray">
-      <div className="flex items-start justify-between w-full gap-[5px]">
+      <div className="flex items-start justify-between w-full gap-[3px]">
         <p className="break-all text-[14px]">
           <span className="mr-[5px] font-medium">{comment.username}</span>
           <span className="opacity-50">{comment.comment}</span>
         </p>
-        <p className="opacity-50 min-w-[80px] text-right text-[10px]">
-          {new Date(comment.createdAt).toLocaleTimeString()}
+        <p className="opacity-50 min-w-[60px] text-right text-[10px]">
+          {timeFromNow(comment.createdAt)}
         </p>
       </div>
     </div>
