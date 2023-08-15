@@ -6,7 +6,8 @@ import { Comment, Product, Video } from "../types/tokoplay"
 import useFetch from "./use-fetch"
 
 function useVideo(route: string) {
-  const [, params] = useRoute<{ id: string }>(route)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [match, params] = useRoute<{ id: string }>(route)
   const video = useFetch<Video>(() => fetchVideo(params?.id as string))
 
   const products = useFetch<Product[]>(() =>
