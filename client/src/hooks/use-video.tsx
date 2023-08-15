@@ -1,9 +1,8 @@
-import { useEffect } from "react"
 import { useLocation, useRoute } from "wouter"
+import { fetchProducts } from "../api/product.api"
 import { fetchVideo } from "../api/video.api"
 import { Product, Video } from "../types/tokoplay"
 import useFetch from "./use-fetch"
-import { fetchProducts } from "../api/product.api"
 
 function useVideo(route: string) {
   const [match, params] = useRoute<{ id: string }>(route)
