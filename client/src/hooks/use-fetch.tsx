@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState, useEffect } from "react"
 
 interface FetchState<T> {
   data: T | undefined
@@ -6,14 +6,23 @@ interface FetchState<T> {
   isLoading: boolean
 }
 
-function useFetch<T>(fetchFunction: () => Promise<T>): FetchState<T> {
+export interface FetchStateWithMutate<T> extends FetchState<T> {
+  mutate: (newData: T) => void
+}
+
+function useFetch<T>(fetchFunction: () => Promise<T>): FetchStateWithMutate<T> {
   const [fetchState, setFetchState] = useState<FetchState<T>>({
     data: undefined,
     error: undefined,
     isLoading: true,
   })
 
-  useEffect(() => {
+  const fetchData = () => {
+    setFetchState((prevState) => ({
+      ...prevState,
+      isLoading: true,
+    }))
+
     fetchFunction()
       .then((data) => {
         setFetchState({ data, error: undefined, isLoading: false })
@@ -25,9 +34,21 @@ function useFetch<T>(fetchFunction: () => Promise<T>): FetchState<T> {
           isLoading: false,
         })
       })
+  }
+
+  useEffect(() => {
+    fetchData()
   }, [])
 
-  return fetchState
+  const mutate = (newData: T) => {
+    setFetchState({
+      data: newData,
+      error: undefined,
+      isLoading: false,
+    })
+  }
+
+  return { ...fetchState, mutate }
 }
 
 export default useFetch
