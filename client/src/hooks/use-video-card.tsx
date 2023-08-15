@@ -7,7 +7,7 @@ function useVideoCard() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false)
-    }, randomize(300))
+    }, randomize(100))
   }, [])
 
   return {

@@ -42,7 +42,7 @@ const Comment = memo(
           {comments.data?.map((c, id) => (
             <CommentItem comment={c} key={id} />
           ))}
-          <div ref={bottomCommentsRef} className="pb-[90px]" />
+          <div ref={bottomCommentsRef} className="pb-[80px]" />
         </div>
 
         <form
@@ -72,7 +72,7 @@ const Comment = memo(
           }}
         >
           <button type="submit">
-            <MessageSquare size={16} className="opacity-50" />
+            <MessageSquare size={16} className="opacity-50 mt-[5px]" />
           </button>
 
           <div className="flex flex-col gap-[5px] w-full text-[12px]">

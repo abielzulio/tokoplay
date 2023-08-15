@@ -1,20 +1,44 @@
-import { X } from "lucide-react"
+import { Eye, X } from "lucide-react"
 import ReactPlayer from "react-player/youtube"
 import Comment from "../components/video/comment"
 import useVideoPage from "../hooks/use-video"
 import ProductCard from "../components/video/product-card"
+import { cn } from "../utils/cn"
+import randomize from "../utils/random"
 
 function VideoPage() {
   const { video, products, comments } = useVideoPage("/video/:id")
   return (
     <section className="relative flex min-w-screen min-h-screen flex-col bg-[#000]">
-      <div className="flex gap-[10px] items-center p-[12px] bg-gray border-b-[1px] border-b-white/10">
-        <button type="button" onClick={() => history.back()}>
-          <X size={14} />
-        </button>
-        <p className="font-semibold">{video.data?.title}</p>
-        <p className="opacity-50">{video.data?.channel}</p>
+      <div className="flex items-center w-full bg-gray">
+        <div className="flex gap-[10px] items-center p-[12px]  border-b-[1px] border-b-white/10">
+          <button type="button" onClick={() => history.back()}>
+            <X size={14} />
+          </button>
+          <p className="font-semibold">{video.data?.title}</p>
+          <p className="opacity-50">{video.data?.channel}</p>
+        </div>
+        {video.data?.category === "Live" && (
+          <div className="flex items-center ml-auto p-[12px] border-l-[1px] border-l-white/10">
+            <div className="bg-red-500 flex items-center gap-[5px] font-medium px-[4px] py-[2px] rounded-l-md border-[1px] border-red-600/30 text-white text-[10px]">
+              <span>Live</span>
+              <span className="w-[5px] h-[5px] rounded-full bg-white animate-pulse animate" />
+            </div>
+            <div className="bg-black/70 backdrop-blur-md flex items-center gap-[5px] px-[4px] py-[4px] rounded-r-md text-[8px] border-[1px] border-white/10">
+              <Eye size={10} className="opacity-50" />
+              <span
+                className={cn("font-mono transition", {
+                  "blur-sm": video.isLoading,
+                  "blur-none": !video.isLoading,
+                })}
+              >
+                {randomize(200)}
+              </span>
+            </div>
+          </div>
+        )}
       </div>
+
       <div className="flex w-full h-[93vh]">
         <div className="w-full bg-white/5 p-[24px] overflow-y-auto border-r-[1px] border-r-white/10">
           <div className="grid grid-rows-1 gap-[24px]">
