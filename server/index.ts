@@ -1,4 +1,3 @@
-import cors from "cors"
 import dotenv from "dotenv"
 import express, { Express } from "express"
 import mongoConnect from "./lib/mongo"
@@ -13,27 +12,6 @@ const port = process.env.PORT
 
 const server = app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`)
-})
-
-app.use((_, res, next) => {
-  cors((req, callback) => {
-    const allowlist = ["http://localhost:5173", "https://tokoplay.zulio.me"]
-    const origin = req.headers.origin
-    if (!origin || (origin && allowlist.indexOf(origin) === -1)) {
-      callback(null, { origin: false })
-      next()
-      return
-    }
-
-    res.header("Access-Control-Allow-Origin", req.headers.origin)
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    )
-    callback(null, { origin: true })
-    next()
-    return
-  })
 })
 
 app.use(express.json())
