@@ -17,9 +17,9 @@ const server = app.listen(port, () => {
 
 app.use(
   cors((req, callback) => {
-    const allowlist = ["http://localhost:5173", "https://tokoplay.zulio.me/"]
+    const allowlist = ["http://localhost:5173", "https://tokoplay.zulio.me"]
     const origin = req.header("Origin")
-    if (origin && allowlist.indexOf(origin) !== -1) {
+    if (!origin || (origin && allowlist.indexOf(origin) === -1)) {
       return callback(null, { origin: true })
     } else {
       return callback(null, { origin: false })
