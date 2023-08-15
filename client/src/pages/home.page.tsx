@@ -31,7 +31,7 @@ function HomePage() {
             className="w-full bg-transparent"
           />
         </div>
-        <div className="flex items-center border-b-[1px] p-[10px] gap-[10px] border-white/20 ">
+        <div className="flex items-center p-[10px] gap-[10px]">
           {tags &&
             tags?.length > 0 &&
             tags.map((category, id) => (
