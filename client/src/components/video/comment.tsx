@@ -1,8 +1,9 @@
-import { Send } from "lucide-react"
-import { memo, useState } from "react"
+import { MessageSquare } from "lucide-react"
+import { memo, useRef, useState } from "react"
 import { Comment, Video } from "../../types/tokoplay"
 import { FetchStateWithMutate } from "../../hooks/use-fetch"
 import { createComment } from "../../api/comment.api"
+import useScrolltToBottom from "../../hooks/use-scroll-to-bottom"
 
 const CommentItem = memo(({ comment }: { comment: Comment }) => {
   return (
@@ -28,24 +29,32 @@ const Comment = memo(
     comments: FetchStateWithMutate<Comment[]>
     videoId: Video["id"]
   }) => {
+    const bottomCommentsRef = useRef<HTMLDivElement>(null)
     const [comment, setComment] = useState("")
+    const [username, setUsername] = useState("")
+
+    useScrolltToBottom(bottomCommentsRef, comments.data)
+
     return (
       <>
-        <div className="flex flex-col gap-[12px] w-full h-[90vh] overflow-y-auto px-[24px] pt-[24px] pb-[48px]">
+        <div className="flex flex-col gap-[12px] w-full h-[90vh] overflow-y-auto px-[18px] pt-[18px] ">
           {comments.data?.map((c, id) => (
             <CommentItem comment={c} key={id} />
           ))}
+          <div ref={bottomCommentsRef} className="pb-[90px]" />
         </div>
+
         <form
-          className="absolute flex items-center bg-gray p-[10px] gap-[15px] inset-x-0 bottom-0 w-full h-[54px] z-5 border-t-[1px] border-white/20"
+          className="absolute flex items-start bg-gray p-[10px] gap-[15px] inset-x-0 bottom-0 w-full h-[90px] z-5 border-t-[1px] border-white/20"
           onSubmit={async (e) => {
             e.preventDefault()
             if (!comment) return alert("Komen tidak boleh kosong")
+            if (!username) return alert("Username tidak boleh kosong")
 
             const newComment = {
               id: Math.random().toString(36).substr(2, 9),
               videoId,
-              username: "Anonymous",
+              username,
               comment,
               createdAt: new Date().toISOString(),
             }
@@ -56,24 +65,35 @@ const Comment = memo(
 
             comments.mutate(newComments)
 
-            await createComment(
-              { username: newComment.username, comment: newComment.comment },
-              videoId
-            )
+            await createComment({ username, comment }, videoId)
 
             setComment("")
           }}
         >
-          <Send size={16} className="opacity-50" />
-          <input
-            type="text"
-            id="comment"
-            name="comment"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            className="w-full h-full text-white rounded-md bg-gray/50"
-            placeholder="Comment"
-          />
+          <button type="submit">
+            <MessageSquare size={16} className="opacity-50" />
+          </button>
+
+          <div className="flex flex-col gap-[5px] w-full text-[12px]">
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="w-full h-full p-[5px] text-white rounded-md border-[1px] border-white/10 bg-gray/50"
+              placeholder="Username"
+            />
+            <input
+              type="text"
+              id="comment"
+              name="comment"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              className="w-full h-full p-[5px] text-white rounded-md border-[1px] border-white/10 bg-gray/50"
+              placeholder="Comment"
+            />
+          </div>
         </form>
       </>
     )
