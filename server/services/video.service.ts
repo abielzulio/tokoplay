@@ -17,6 +17,17 @@ export class VideoService {
     }
   }
 
+  public async getVideoById(
+    id: Parameters<VideoRepository["getVideoById"]>[0]
+  ): ReturnType<VideoRepository["getVideoById"]> {
+    try {
+      const video = await this.videoRepository.getVideoById(id)
+      return video
+    } catch (error) {
+      throw error
+    }
+  }
+
   public async getAllVideos(): ReturnType<VideoRepository["getAllVideos"]> {
     try {
       const videos = await this.videoRepository.getAllVideos()
