@@ -81,7 +81,7 @@ function HomePage() {
           </div>
         ) : (
           <div className="p-[10px] flex items-center justify-center w-full min-h-[50vh]">
-            <p className="opacity-50">Video tidak ada</p>
+            <p className="opacity-50">Video tidak dapat ditemukan</p>
           </div>
         )}
       </section>
