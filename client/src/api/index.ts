@@ -4,7 +4,7 @@ import { TokoplayResponseData, TokoplayResponseMeta } from "./api"
 export const API_URL =
   import.meta.env.MODE === "development"
     ? "http://localhost:3000/v1"
-    : "https://tokoplay-api.onrender.com"
+    : "https://tokoplay-api.onrender.com/v1"
 
 export const KY_CONFIG: Options = {
   prefixUrl: API_URL,

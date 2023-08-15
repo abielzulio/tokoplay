@@ -17,7 +17,7 @@ const server = app.listen(port, () => {
 
 app.use(
   cors((req, callback) => {
-    const allowlist = ["http://localhost:5173", "https://tokoplay.netlify.app"]
+    const allowlist = ["http://localhost:5173", "https://tokoplay.zulio.me/"]
     const origin = req.header("Origin")
     if (!origin || allowlist.indexOf(origin) === -1) {
       return callback(null, { origin: false })
