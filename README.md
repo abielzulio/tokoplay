@@ -10,6 +10,8 @@ Tokopedia's Play web app clone as a Gojek's GIGIH 3.0 final term assignment with
 
 ### Search and filter
 
+![](public/filter.gif)
+
 ### Auto-scroll comment
 
 ### Optimistic UI
