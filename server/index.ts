@@ -20,7 +20,7 @@ app.use(
     const allowlist = ["http://localhost:5173", "https://tokoplay.zulio.me/"]
     const origin = req.header("Origin")
     if (!origin || allowlist.indexOf(origin) === -1) {
-      return callback(null, { origin: false })
+      return callback(null, { origin: allowlist })
     } else {
       return callback(null, { origin: true })
     }
