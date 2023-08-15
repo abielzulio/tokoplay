@@ -7,7 +7,7 @@ import useFetch from "./use-fetch"
 
 function useVideo(route: string) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [match, params] = useRoute<{ id: string }>(route)
+  const [, params] = useRoute<{ id: string }>(route)
   const video = useFetch<Video>(() => fetchVideo(params?.id as string))
 
   const products = useFetch<Product[]>(() =>
