@@ -1,13 +1,13 @@
 import { Eye } from "lucide-react"
 import { memo } from "react"
 import { Link } from "wouter"
-import useVideo from "../../hooks/use-video"
+import useVideoCard from "../../hooks/use-video-card"
 import { Video } from "../../types/tokoplay"
 import { cn } from "../../utils/cn"
 import randomize from "../../utils/random"
 
 const VideoCard = memo(({ video }: { video: Video }) => {
-  const { isLoading } = useVideo()
+  const { isLoading } = useVideoCard()
   return (
     <Link href={`/video/${video.id}`}>
       <div className="flex flex-col hover:cursor-pointer gap-[10px] w-full h-[400px] rounded-md border-[1px] overflow-hidden border-white/10">

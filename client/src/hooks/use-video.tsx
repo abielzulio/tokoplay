@@ -1,17 +1,44 @@
-import { useEffect, useState } from "react"
-import randomize from "../utils/random"
+import { useEffect } from "react"
+import { useLocation, useRoute } from "wouter"
+import { fetchVideo } from "../api/video.api"
+import { Product, Video } from "../types/tokoplay"
+import useFetch from "./use-fetch"
+import { fetchProducts } from "../api/product.api"
 
-function useVideo() {
-  const [isLoading, setLoading] = useState(true)
+function useVideo(route: string) {
+  const [match, params] = useRoute<{ id: string }>(route)
+  const [location, setLocation] = useLocation()
+  const {
+    data: video,
+    error: videoError,
+    isLoading,
+  } = useFetch<Video>(() => fetchVideo(params?.id as string))
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false)
-    }, randomize(300))
-  }, [])
+  const {
+    data: products,
+    error: productsError,
+    isLoading: isProductsLoading,
+  } = useFetch<Product[]>(() => fetchProducts(params?.id as string))
+
+  /*   const [products, setProducts] = useState<Product[]>([])
+  const [comments, setComments] = useState<Comment[]>([]) */
+
+  /*   const [isLoading, setLoading] = useState(true) */
+
+  /*   useEffect(() => {}, []) */
 
   return {
-    isLoading,
+    video: {
+      data: video,
+      error: videoError,
+      isLoading,
+    },
+    products: {
+      data: products,
+      error: productsError,
+      isLoading: isProductsLoading,
+    },
+    /*     products, */
   }
 }
 
