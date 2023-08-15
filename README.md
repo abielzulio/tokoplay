@@ -1,8 +1,12 @@
 <h1 align="center">Tokoplay</h1>
 
 <h3 align="center">
-Tokopedia's Play web app clone as a Gojek's GIGIH 3.0 final term assignment with MERN stack (TypeScript + Papr)
+Tokopedia's Play web app clone as a Gojek's GIGIH 3.0 final term assignment with MERN stack
 </h3>
+
+<p align="center">
+MongoDB (Mongoose + Papr), Express, React (Vite + SWC), and Node. Written in TypeScript.
+</p>
 
 ![](public/main.png)
 
@@ -14,7 +18,11 @@ Tokopedia's Play web app clone as a Gojek's GIGIH 3.0 final term assignment with
 
 ### Auto-scroll comment
 
+![](public/auto-scroll.gif)
+
 ### Optimistic UI
+
+![](public/optimistic.gif)
 
 # How to run
 
