@@ -4,12 +4,13 @@ import { WithId } from "mongodb"
 
 export class ProductRepository {
   public async createProduct(
-    payload: Omit<ProductDocument, "id" | "_id">
+    payload: Omit<ProductDocument, "id" | "_id" | "createdAt">
   ): Promise<void> {
     try {
       const id = nanoid()
       const newProduct: Omit<ProductDocument, "_id"> = {
         id,
+        createdAt: new Date(),
         ...payload,
       }
       await Product.insertOne(newProduct)
