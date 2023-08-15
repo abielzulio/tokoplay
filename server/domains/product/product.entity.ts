@@ -8,6 +8,7 @@ const productSchema = schema({
   image: types.string({ required: true }),
   price: types.number({ required: true }),
   url: types.string({ required: true }),
+  createdAt: types.date({ required: true }),
 })
 
 export type ProductDocument = (typeof productSchema)[0]
